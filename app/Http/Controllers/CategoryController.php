@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\category\StoreCategoryPost;
+use App\Models\dashboard\category\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -33,10 +35,12 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategoryPost $request)
     {
         //
-        echo "hola mundo";
+        $validated = $request->validated();
+        Category::create($validated);
+        return back();
     }
 
     /**
