@@ -77,9 +77,12 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreCategoryPost $request, Category $category)
     {
-        //
+        //        
+        $validated = $request->validated();
+        $category->update($validated);
+        return back()->with('status', 'Se actulizo exitosamente!!');
     }
 
     /**
@@ -88,8 +91,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return back()->with('status', 'Se elimino con exito');
     }
 }

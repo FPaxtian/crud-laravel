@@ -6,7 +6,7 @@
             {{ session('status') }}
         </div>
     @endif
-    <form action="{{ route('category.store') }}" method="post" class="col-8 mx-auto">
+    <form action="{{ route('category.store') }}" method="POST" class="col-8 mx-auto">
         @csrf
         <div class="form-group ">
             <label for="name_category">Nombre de la categoria</label>

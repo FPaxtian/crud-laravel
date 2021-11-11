@@ -6,8 +6,9 @@
             {{ session('status') }}
         </div>
     @endif
-    <form action="{{ route('category.store') }}" method="post" class="col-8 mx-auto">
+    <form action="{{ route('category.update', $category->id) }}" method="POST" class="col-8 mx-auto">
         @csrf
+        @method('PUT')
         <div class="form-group ">
             <label for="name_category">Nombre de la categoria</label>
             <input type="text" name="name_category" id="name_category" value="{{ $category->name_category }}"
