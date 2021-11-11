@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
+Route::get('/dashboard', function () {
+    return view('dashboard.dashboard');
+})->name('dashboard');
 ///Route::resource('dashboard/product', ProductController::class);
 Route::resource('dashboard/category', CategoryController::class);

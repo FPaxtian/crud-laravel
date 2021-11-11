@@ -15,7 +15,12 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+
+        $categorys = Category::orderBy('id', 'desc')
+            ->paginate(3);
+
+        //dd($categorys);
+        return view('dashboard/category/index', ['categorys' => $categorys]);
     }
 
     /**
@@ -26,7 +31,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
-        return view('dashboard/category/create');
+        return view('dashboard.category.create');
     }
 
     /**
@@ -40,7 +45,7 @@ class CategoryController extends Controller
         //
         $validated = $request->validated();
         Category::create($validated);
-        return back();
+        return back()->with('status', 'Se creo exitosamente!!');
     }
 
     /**
@@ -49,9 +54,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        return view('dashboard.category.show', ['category' => $category]);
     }
 
     /**
@@ -60,9 +65,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('dashboard.category.edit', ['category' => $category]);
     }
 
     /**
