@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\product\StoreProductPost;
+use App\Mail\EmailCreationProduct;
 use App\Models\dashboard\category\Category;
 use App\Models\dashboard\product\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ProductController extends Controller
 {
@@ -47,6 +49,8 @@ class ProductController extends Controller
     public function store(StoreProductPost $request)
     {
 
+        $email = new EmailCreationProduct;
+        Mail::to('pakito.pax@gmail.com')->bcc('francisco.izqpax@gmail.com')->send($email);
         $validated = $request->validated();
         Product::create($validated);
         return back()->with('status', 'Se creo exitosamente!!');

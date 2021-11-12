@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Mail\EmailCreationProduct;
 use App\Models\dashboard\category\Category;
 use App\Models\dashboard\product\Product;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +19,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/test-email', function () {
+
+    $email = new EmailCreationProduct;
+    Mail::to('pakito.pax@gmail.com')->bcc('francisco.izqpax@gmail.com')->send($email);
+});
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
