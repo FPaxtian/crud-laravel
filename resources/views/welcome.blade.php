@@ -17,7 +17,34 @@
 <body class="container">
 
     @include('partials.navbar')
-    public
+    <div class="body-center mp-welcome row">
+        <div class="col-lg-8">
+            <div class="title-welcome mb-4">
+                AUTOREFACCIONES MÉXICO
+            </div>
+            <div class="sub-title-welcome">
+                Todo lo que no encuentren en refaciones nosotros se lo conseguimos.
+            </div>
+            <div class="mt-4">
+                <a href="{{ route('product.index') }}" type="button" class="btn btn-blue btn-lg">Ver ahora</a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <img src="{{ asset('img/auto-parts.jpg') }}" alt="auto parts" class="img-welcome ">
+        </div>
+    </div>
+
+    <div class="container">
+        <footer class="py-3 my-4">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item"><a href="{{ route('product.index') }}"
+                        class="nav-link px-2 text-muted">Productos</a></li>
+                <li class="nav-item"><a href="{{ route('category.index') }}"
+                        class="nav-link px-2 text-muted">Categorias</a></li>
+            </ul>
+            <p class="text-center text-muted">&copy; 2021 Becario Quaxar, Inc</p>
+        </footer>
+    </div>
 
 </body>
 

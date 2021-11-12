@@ -1,9 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap");
 body {
     font-family: "Montserrat", sans-serif;
+    background-color: #f8f8f8;
 }
 
-.navbar {}
+.navbar {
+    border-bottom: 2px solid #8d67ff;
+}
 
 .navbar-brand {
     font-weight: 800;
@@ -58,4 +61,25 @@ body {
     font-size: 14px;
     background-color: #dbdbdb;
     margin-bottom: .7rem;
+}
+
+.title-welcome {
+    font-weight: 800;
+    font-size: 34px;
+}
+
+.sub-title-welcome {
+    font-weight: 500;
+    font-size: 22px;
+}
+
+.mp-welcome {
+    margin-top: 1.5rem;
+}
+
+.img-welcome {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 3px;
 }
