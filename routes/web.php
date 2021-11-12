@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Models\dashboard\category\Category;
+use App\Models\dashboard\product\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +21,9 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 Route::get('/dashboard', function () {
-    return view('dashboard.dashboard');
+    $countProduct = Product::get()->count();
+    $countCategory = Category::get()->count();;
+    return view('dashboard.dashboard', ['countProduct' => $countProduct, 'countCategory' => $countCategory]);
 })->name('dashboard');
 ///Route::resource('dashboard/product', ProductController::class);
 Route::resource('dashboard/category', CategoryController::class);
