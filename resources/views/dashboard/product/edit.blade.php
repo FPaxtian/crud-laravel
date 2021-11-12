@@ -6,12 +6,13 @@
             {{ session('status') }}
         </div>
     @endif
-    <form action="{{ route('product.store') }}" method="POST" class="col-8 mx-auto">
+    <form action="{{ route('product.update', $product->id) }}" method="POST" class="col-8 mx-auto">
         @csrf
+        @method('PUT')
         <div class="form-group ">
             <div class="mb-3">
                 <label for="name_product">Nombre del producto</label>
-                <input type="text" name="name_product" id="name_product" value="{{ old('name_product') }}"
+                <input type="text" name="name_product" id="name_product" value="{{ $product->name_product }}"
                     class="form-control">
                 @error('name_product')
                     <small class="text-danger">{{ $message }}</small>
@@ -19,14 +20,14 @@
             </div>
             <div class="mb-3">
                 <label for="desct" class="form-label">Descripción del producto</label>
-                <textarea class="form-control" name="desct" id="desct" rows="3"> {{ old('desct') }}</textarea>
+                <textarea class="form-control" name="desct" id="desct" rows="3">{{ $product->desct }}</textarea>
                 @error('desct')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
             <div class="mb-3">
                 <label for="price_provider">Precio del provedor</label>
-                <input type="text" name="price_provider" id="price_provider" value="{{ old('price_provider') }}"
+                <input type="text" name="price_provider" id="price_provider" value="{{ $product->price_provider }}"
                     class="form-control">
                 @error('price_provider')
                     <small class="text-danger">{{ $message }}</small>
@@ -34,7 +35,7 @@
             </div>
             <div class="mb-3">
                 <label for="price_final">Precio de venta</label>
-                <input type="text" name="price_final" id="price_final" value="{{ old('price_final') }}"
+                <input type="text" name="price_final" id="price_final" value="{{ $product->price_final }}"
                     class="form-control">
                 @error('price_final')
                     <small class="text-danger">{{ $message }}</small>
@@ -42,7 +43,7 @@
             </div>
             <div class="mb-3">
                 <label for="stock">Existencias</label>
-                <input type="text" name="stock" id="stock" value="{{ old('stock') }}" class="form-control">
+                <input type="text" name="stock" id="stock" value="{{ $product->stock }}" class="form-control">
                 @error('stock')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
@@ -53,7 +54,7 @@
                     aria-label="size 3 select example">
                     @foreach ($categorys as $category)
 
-                        @if (intval(old('id_category')) === intval($category->id))
+                        @if (intval(old('id_category')) === intval($category->id) || intval($product->id_category) === intval($category->id))
                             <option value="{{ $category->id }}" selected>{{ $category->name_category }}</option>
                         @else
                             <option value="{{ $category->id }}">{{ $category->name_category }}</option>

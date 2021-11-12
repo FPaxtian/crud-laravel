@@ -8,8 +8,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
+                <a class="nav-link" href="{{ route('product.index') }}">Productos</a>
                 <a class="nav-link" href="{{ route('category.index') }}">Categoria</a>
-                <a class="nav-link" href="#">Productos</a>
             </div>
             <form class="d-flex ml-auto">
                 <a type="button" href="{{ route('dashboard') }}" class="btn btn-light btn-blue">Ir panel control</a>

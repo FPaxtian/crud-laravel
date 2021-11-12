@@ -23,3 +23,4 @@ Route::get('/dashboard', function () {
 })->name('dashboard');
 ///Route::resource('dashboard/product', ProductController::class);
 Route::resource('dashboard/category', CategoryController::class);
+Route::resource('dashboard/product', ProductController::class);

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\product\StoreProductPost;
+use App\Models\dashboard\category\Category;
+use App\Models\dashboard\product\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -13,7 +16,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::join('category', 'product.id_category', '=', 'category.id')
+            ->select('product.*', 'category.name_category')
+            ->orderBy('id', 'desc')
+            ->paginate(3);
+
+        //dd($products);
+        return view('dashboard.product.index', ['products' => $products]);
     }
 
     /**
@@ -24,7 +33,9 @@ class ProductController extends Controller
     public function create()
     {
         //
-        return view('welcome');
+        $categorys = Category::orderBy('id', 'desc')
+            ->get();
+        return view('dashboard.product.create', ['categorys' => $categorys]);
     }
 
     /**
@@ -33,9 +44,12 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProductPost $request)
     {
-        //
+
+        $validated = $request->validated();
+        Product::create($validated);
+        return back()->with('status', 'Se creo exitosamente!!');
     }
 
     /**
@@ -47,6 +61,15 @@ class ProductController extends Controller
     public function show($id)
     {
         //
+        $product = Product::findOrFail($id)->join('category', 'product.id_category', '=', 'category.id')->select('product.*', 'category.name_category')
+            ->where('product.id', '=', $id)->get();;
+
+        //dd($product);
+        //dd($product->namecategory);
+        return response()->json($product);
+        //$comment = Product::find(1);
+
+        //return $comment->post->category->name_category;
     }
 
     /**
@@ -55,9 +78,12 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        $categorys = Category::orderBy('id', 'desc')
+            ->get();
+        //return response()->json($product);        
+        return view('dashboard.product.edit', ['product' => $product, 'categorys' => $categorys]);
     }
 
     /**
@@ -67,9 +93,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreProductPost $request, Product $product)
     {
-        //
+        $validated = $request->validated();
+        $product->update($validated);
+        return back()->with('status', 'Se actualizo exitosamente!!');
     }
 
     /**
@@ -78,8 +106,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return back()->with('status', 'Se elimino con exito');
     }
 }

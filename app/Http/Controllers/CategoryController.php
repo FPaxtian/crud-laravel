@@ -82,7 +82,7 @@ class CategoryController extends Controller
         //        
         $validated = $request->validated();
         $category->update($validated);
-        return back()->with('status', 'Se actulizo exitosamente!!');
+        return back()->with('status', 'Se actualizo exitosamente!!');
     }
 
     /**
